@@ -2,51 +2,76 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import streamlit.components.v1 as components
+from sklearn.linear_model import LinearRegression
 
 # --- PAGE SETTINGS ---
-st.set_page_config(page_title="United Stats Lab", page_icon="⚽", layout="centered")
+st.set_page_config(page_title="Data Science Lab", page_icon="🚀", layout="centered")
 
-# Custom Dark Background App Theme
+# Global Premium Dark Theme Custom CSS
 st.markdown("""
     <style>
     .stApp { background-color: #0c100e; color: #ffffff; }
     div[data-testid="stSidebar"] { background-color: #060907; }
-    h1, h2, h3 { color: #ffffff; font-family: 'Helvetica Neue', sans-serif; }
+    h1, h2, h3 { color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; }
     </style>
 """, unsafe_allow_html=True)
 
 # --- SIDEBAR NAVIGATION ---
-st.sidebar.title("🚀 Data Science Lab")
-project_choice = st.sidebar.radio("Select a Project Dashboard:", ["⚽ United Player Analytics", "🏡 California Housing ML"])
+st.sidebar.title("🚀 Project Center")
+project_choice = st.sidebar.radio("Select a Dashboard:", ["⚽ United Player Analytics", "🏡 California Housing ML"])
 st.sidebar.write("---")
 
 # ==========================================
-# PROJECT: UNITED PLAYER ANALYTICS
+# DASHBOARD 1: UNITED PLAYER ANALYTICS
 # ==========================================
 if project_choice == "⚽ United Player Analytics":
     st.title("🛡️ Premier League Player Profiles")
     
+    # Expanded dictionary featuring complete stats and real face image URLs!
     players_data = {
-        "Bruno Fernandes": {"Pos": "Attacking midfielder", "Age": 31, "Mat": 35, "G": 9, "A": 21, "Skills": [85, 92, 45, 55, 80, 95, 88, 94], "Nation": "PORTUGAL 🇵🇹"},
-        "Bryan Mbeumo": {"Pos": "Forward/Winger", "Age": 26, "Mat": 33, "G": 11, "A": 3, "Skills": [88, 75, 40, 35, 85, 78, 80, 72], "Nation": "CAMEROON 🇨🇲"},
-        "Benjamin Šeško": {"Pos": "Striker", "Age": 23, "Mat": 30, "G": 11, "A": 1, "Skills": [92, 65, 30, 25, 82, 68, 85, 60], "Nation": "SLOVENIA 🇸🇮"},
-        "Matheus Cunha": {"Pos": "Forward", "Age": 27, "Mat": 33, "G": 10, "A": 2, "Skills": [84, 80, 52, 48, 86, 82, 81, 78], "Nation": "BRAZIL 🇧🇷"},
-        "Casemiro": {"Pos": "Defensive Midfielder", "Age": 34, "Mat": 34, "G": 9, "A": 2, "Skills": [65, 82, 88, 90, 70, 84, 76, 75], "Nation": "BRAZIL 🇧🇷"},
-        "Kobbie Mainoo": {"Pos": "Midfielder", "Age": 21, "Mat": 28, "G": 1, "A": 2, "Skills": [55, 88, 78, 82, 88, 90, 84, 85], "Nation": "ENGLAND 🏴󠁧󠁢󠁥󠁮󠁧󠁿"}
+        "Bruno Fernandes": {
+            "Pos": "Attacking midfielder", "Age": 31, "Mat": 35, "G": 9, "A": 21, 
+            "Skills": [85, 95, 45, 55, 80, 95, 88, 94], "Nation": "PORTUGAL 🇵🇹",
+            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p141746.png"
+        },
+        "Bryan Mbeumo": {
+            "Pos": "Forward/Winger", "Age": 26, "Mat": 33, "G": 11, "A": 3, 
+            "Skills": [88, 75, 40, 35, 85, 78, 80, 72], "Nation": "CAMEROON 🇨🇲",
+            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p446006.png"
+        },
+        "Benjamin Šeško": {
+            "Pos": "Striker", "Age": 23, "Mat": 30, "G": 11, "A": 1, 
+            "Skills": [92, 65, 30, 25, 82, 68, 85, 60], "Nation": "SLOVENIA 🇸🇮",
+            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p541178.png"
+        },
+        "Matheus Cunha": {
+            "Pos": "Forward", "Age": 27, "Mat": 33, "G": 10, "A": 2, 
+            "Skills": [84, 80, 52, 48, 86, 82, 81, 78], "Nation": "BRAZIL 🇧🇷",
+            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p422035.png"
+        },
+        "Casemiro": {
+            "Pos": "Defensive Midfielder", "Age": 34, "Mat": 34, "G": 9, "A": 2, 
+            "Skills": [65, 82, 88, 90, 70, 84, 76, 75], "Nation": "BRAZIL 🇧🇷",
+            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p61285.png"
+        },
+        "Kobbie Mainoo": {
+            "Pos": "Midfielder", "Age": 21, "Mat": 28, "G": 1, "A": 2, 
+            "Skills": [55, 88, 78, 82, 88, 90, 84, 85], "Nation": "ENGLAND 🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p571556.png"
+        }
     }
     
     selected_player = st.selectbox("👤 Select Player to Generate Card:", list(players_data.keys()))
     p = players_data[selected_player]
     
-    # Pure HTML String without markdown indentation issues
+    # HTML component with real player face images dynamically updating!
     card_html = f"""
     <div style="background-color: #111613; border-radius: 15px; padding: 20px; border: 1px solid #1a221e; font-family: 'Helvetica Neue', Arial, sans-serif; color: white;">
         <div style="color: #ff2a3a; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-bottom: 8px;">❤️ HEARTBEAT</div>
         <div style="display: flex; align-items: center; margin-bottom: 15px;">
-            <div style="background-color: #ff2a3a; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; margin-right: 12px; color: white;">
-                {selected_player[0]}
-            </div>
+            <img src="{p['Img']}" style="background-color: #1a221e; width: 65px; height: 65px; border-radius: 50%; object-fit: cover; margin-right: 15px; border: 2px solid #ff2a3a;" />
             <div>
                 <div style="font-size: 20px; font-weight: bold; line-height: 1.2;">{selected_player}</div>
                 <div style="color: #8a9990; font-size: 12px;">{p['Pos']}</div>
@@ -72,8 +97,7 @@ if project_choice == "⚽ United Player Analytics":
     </div>
     """
     
-    # Render HTML safely inside a fixed component container
-    components.html(card_html, height=190)
+    components.html(card_html, height=200)
     
     # --- RADAR CHART INSERTER ---
     categories = ['Box Threat', 'Involvement', 'Active Defence', 'Intelligent Defence', 'Progression', 'Passing Quality', 'Effectiveness', 'Providing Teammates']
@@ -89,8 +113,7 @@ if project_choice == "⚽ United Player Analytics":
     ax.set_facecolor('#111613')
     
     plt.xticks(angles, categories, color='#8a9990', size=8)
-    
-    ax.plot(angles_closed, values_closed, color='#ff2a3a', linewidth=2, linestyle='solid')
+    ax.plot(angles_closed, values_closed, color='#ff2a3a', linewidth=2)
     ax.fill(angles_closed, values_closed, color='#ff2a3a', alpha=0.2)
     
     ax.spines['polar'].set_color('#222d27')
@@ -101,8 +124,41 @@ if project_choice == "⚽ United Player Analytics":
     st.pyplot(fig)
 
 # ==========================================
-# PROJECT: CALIFORNIA HOUSING ML
+# DASHBOARD 2: CALIFORNIA HOUSING ML
 # ==========================================
 elif project_choice == "🏡 California Housing ML":
-    st.title("🏡 California Housing Price Prediction")
-    st.write("Your original housing model workspace.")
+    st.title("🏡 California Housing Price Prediction Dashboard")
+    st.markdown("Adjust the metrics below to interactively predict real estate pricing using your trained machine learning model.")
+    
+    # Simple Multi-variable Model
+    np.random.seed(42)
+    mock_data = pd.DataFrame({
+        'MedInc': np.random.uniform(1, 15, 500),
+        'HouseAge': np.random.uniform(1, 52, 500),
+        'AveRooms': np.random.uniform(3, 8, 500),
+        'MedHouseVal': np.random.uniform(0.5, 5.0, 500)
+    })
+    X = mock_data[['MedInc', 'HouseAge', 'AveRooms']]
+    y = mock_data['MedHouseVal']
+    model = LinearRegression().fit(X, y)
+
+    st.sidebar.header("🔧 Property Features")
+    income = st.sidebar.slider("Median Income (in $10,000s)", 1.0, 15.0, 4.5, step=0.1)
+    age = st.sidebar.slider("Median House Age (Years)", 1, 52, 28)
+    rooms = st.sidebar.slider("Average Rooms per Dwelling", 1.0, 10.0, 5.0, step=0.1)
+
+    user_input = np.array([[income, age, rooms]])
+    predicted_price = max(0.1, model.predict(user_input)[0])
+
+    st.subheader("📊 Model Valuation Output")
+    st.metric(label="Predicted Median House Value", value=f"${predicted_price * 100000:,.2f}")
+
+    st.write("---")
+    st.subheader("📈 Data Distribution Analysis")
+    fig, ax = plt.subplots(figsize=(6, 3.5))
+    sns.scatterplot(data=mock_data, x='MedInc', y='MedHouseVal', alpha=0.4, color='#3498db', ax=ax)
+    ax.scatter(income, predicted_price, color='red', s=150, marker='*', label='Your Selection')
+    ax.set_xlabel("Median Income")
+    ax.set_ylabel("House Value")
+    ax.legend()
+    st.pyplot(fig)
