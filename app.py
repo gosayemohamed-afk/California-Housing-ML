@@ -27,7 +27,7 @@ st.sidebar.write("---")
 # DASHBOARD 1: UNITED PLAYER ANALYTICS
 # ==========================================
 if project_choice == "⚽ United Player Analytics":
-    st.title("🛡️ Premier League Player Profiles")
+    st.title("🛡️ manchester united players Premier League Profiles")
     
     # Expanded dictionary featuring complete stats and real face image URLs!
     players_data = {
