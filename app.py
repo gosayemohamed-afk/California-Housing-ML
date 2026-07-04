@@ -141,6 +141,21 @@ if project_choice == "⚽ United Player Analytics":
                 <div style="color: #55635a; font-size: 9px; font-weight: bold; text-transform: uppercase;">Assists</div>
             </div>
         </div>
+<img src="{p['Img']}"
+     style="width:100%;height:100%;object-fit:cover;"
+     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+
+<div style="display:none;
+            width:100%;
+            height:100%;
+            align-items:center;
+            justify-content:center;
+            background:#222d27;
+            color:#ff2a3a;
+            font-size:22px;
+            font-weight:bold;">
+    {p['Initials']}
+</div>
     </div>
     """
     
