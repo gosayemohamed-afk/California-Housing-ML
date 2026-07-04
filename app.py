@@ -31,44 +31,78 @@ if project_choice == "⚽ United Player Analytics":
     
     # Updated dictionary containing player data and calculated initials
     players_data = {
-        "Bruno Fernandes": {
-            "Pos": "Attacking midfielder", "Age": 31, "Mat": 35, "G": 9, "A": 21, 
-            "Skills": [85, 95, 45, 55, 80, 95, 88, 94], "Nation": "PORTUGAL 🇵🇹",
-            "Initials": "BF",
-            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p141746.png"
-        },
-        "Bryan Mbeumo": {
-            "Pos": "Forward/Winger", "Age": 26, "Mat": 33, "G": 11, "A": 3, 
-            "Skills": [88, 75, 40, 35, 85, 78, 80, 72], "Nation": "CAMEROON 🇨🇲",
-            "Initials": "BM",
-            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p446008.png"
-        },
-        "Benjamin Šeško": {
-            "Pos": "Striker", "Age": 23, "Mat": 30, "G": 11, "A": 1, 
-            "Skills": [92, 65, 30, 25, 82, 68, 85, 60], "Nation": "SLOVENIA 🇸🇮",
-            "Initials": "BŠ",
-            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p541178.png"
-        },
-        "Matheus Cunha": {
-            "Pos": "Forward", "Age": 27, "Mat": 33, "G": 10, "A": 2, 
-            "Skills": [84, 80, 52, 48, 86, 82, 81, 78], "Nation": "BRAZIL 🇧🇷",
-            "Initials": "MC",
-            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p422035.png"
-        },
-        "Casemiro": {
-            "Pos": "Defensive Midfielder", "Age": 34, "Mat": 34, "G": 9, "A": 2, 
-            "Skills": [65, 82, 88, 90, 70, 84, 76, 75], "Nation": "BRAZIL 🇧🇷",
-            "Initials": "CS",
-            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p61285.png"
-        },
-        "Kobbie Mainoo": {
-            "Pos": "Midfielder", "Age": 21, "Mat": 28, "G": 1, "A": 2, 
-            "Skills": [55, 88, 78, 82, 88, 90, 84, 85], "Nation": "ENGLAND 🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-            "Initials": "KM",
-            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p571556.png"
-        }
+    "Bruno Fernandes": {
+        "Pos": "Attacking midfielder",
+        "Age": 31,
+        "Mat": 35,
+        "G": 9,
+        "A": 21,
+        "Skills": [85, 95, 45, 55, 80, 95, 88, 94],
+        "Nation": "PORTUGAL 🇵🇹",
+        "Initials": "BF",
+        "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p141746.png"
+    },
+
+    "Bryan Mbeumo": {
+        "Pos": "Forward/Winger",
+        "Age": 26,
+        "Mat": 33,
+        "G": 11,
+        "A": 3,
+        "Skills": [88, 75, 40, 35, 85, 78, 80, 72],
+        "Nation": "CAMEROON 🇨🇲",
+        "Initials": "BM",
+        "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p446008.png"
+    },
+
+    "Benjamin Šeško": {
+        "Pos": "Striker",
+        "Age": 23,
+        "Mat": 30,
+        "G": 11,
+        "A": 1,
+        "Skills": [92, 65, 30, 25, 82, 68, 85, 60],
+        "Nation": "SLOVENIA 🇸🇮",
+        "Initials": "BS",
+        "Img": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Benjamin_Sesko_2022.jpg"
+    },
+
+    "Matheus Cunha": {
+        "Pos": "Forward",
+        "Age": 27,
+        "Mat": 33,
+        "G": 10,
+        "A": 2,
+        "Skills": [84, 80, 52, 48, 86, 82, 81, 78],
+        "Nation": "BRAZIL 🇧🇷",
+        "Initials": "MC",
+        "Img": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Matheus_Cunha_2022.jpg"
+    },
+
+    "Casemiro": {
+        "Pos": "Defensive Midfielder",
+        "Age": 34,
+        "Mat": 34,
+        "G": 9,
+        "A": 2,
+        "Skills": [65, 82, 88, 90, 70, 84, 76, 75],
+        "Nation": "BRAZIL 🇧🇷",
+        "Initials": "CS",
+        "Img": "https://upload.wikimedia.org/wikipedia/commons/3/36/Casemiro_2018.jpg"
+    },
+
+    "Kobbie Mainoo": {
+        "Pos": "Midfielder",
+        "Age": 21,
+        "Mat": 28,
+        "G": 1,
+        "A": 2,
+        "Skills": [55, 88, 78, 82, 88, 90, 84, 85],
+        "Nation": "ENGLAND 🏴",
+        "Initials": "KM",
+        "Img": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Kobbie_Mainoo_2024.jpg"
     }
-    
+}
     selected_player = st.selectbox("👤 Select Player to Generate Card:", list(players_data.keys()))
     p = players_data[selected_player]
     
