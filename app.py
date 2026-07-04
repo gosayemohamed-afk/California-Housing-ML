@@ -29,36 +29,42 @@ st.sidebar.write("---")
 if project_choice == "⚽ United Player Analytics":
     st.title("🛡️ Premier League Player Profiles")
     
-    # Fully corrected dictionary with accurate image URL addresses
+    # Updated dictionary containing player data and calculated initials
     players_data = {
         "Bruno Fernandes": {
             "Pos": "Attacking midfielder", "Age": 31, "Mat": 35, "G": 9, "A": 21, 
             "Skills": [85, 95, 45, 55, 80, 95, 88, 94], "Nation": "PORTUGAL 🇵🇹",
+            "Initials": "BF",
             "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p141746.png"
         },
         "Bryan Mbeumo": {
             "Pos": "Forward/Winger", "Age": 26, "Mat": 33, "G": 11, "A": 3, 
             "Skills": [88, 75, 40, 35, 85, 78, 80, 72], "Nation": "CAMEROON 🇨🇲",
+            "Initials": "BM",
             "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p446008.png"
         },
         "Benjamin Šeško": {
             "Pos": "Striker", "Age": 23, "Mat": 30, "G": 11, "A": 1, 
             "Skills": [92, 65, 30, 25, 82, 68, 85, 60], "Nation": "SLOVENIA 🇸🇮",
+            "Initials": "BŠ",
             "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p541178.png"
         },
         "Matheus Cunha": {
             "Pos": "Forward", "Age": 27, "Mat": 33, "G": 10, "A": 2, 
             "Skills": [84, 80, 52, 48, 86, 82, 81, 78], "Nation": "BRAZIL 🇧🇷",
+            "Initials": "MC",
             "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p422035.png"
         },
         "Casemiro": {
             "Pos": "Defensive Midfielder", "Age": 34, "Mat": 34, "G": 9, "A": 2, 
             "Skills": [65, 82, 88, 90, 70, 84, 76, 75], "Nation": "BRAZIL 🇧🇷",
+            "Initials": "CS",
             "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p61285.png"
         },
         "Kobbie Mainoo": {
             "Pos": "Midfielder", "Age": 21, "Mat": 28, "G": 1, "A": 2, 
             "Skills": [55, 88, 78, 82, 88, 90, 84, 85], "Nation": "ENGLAND 🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+            "Initials": "KM",
             "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p571556.png"
         }
     }
@@ -66,17 +72,18 @@ if project_choice == "⚽ United Player Analytics":
     selected_player = st.selectbox("👤 Select Player to Generate Card:", list(players_data.keys()))
     p = players_data[selected_player]
     
-    # Elegant Inline SVG Silhouette that loads instantly if external URLs fail
-    svg_fallback = "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff2a3a'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E"
-
-    # HTML component with premium error recovery handling
+    # HTML component with text fallback system if images fail to load
     card_html = f"""
     <div style="background-color: #111613; border-radius: 15px; padding: 20px; border: 1px solid #1a221e; font-family: 'Helvetica Neue', Arial, sans-serif; color: white;">
         <div style="color: #ff2a3a; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-bottom: 8px;">❤️ HEARTBEAT</div>
         <div style="display: flex; align-items: center; margin-bottom: 15px;">
-            <div style="width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff2a3a; overflow: hidden; background-color: #1a221e; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                <img src="{p['Img']}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" style="width: 100%; height: 100%; object-fit: cover;" />
-                <div style="display: none; width: 40px; height: 40px; background: url(\"data:image/svg+xml,{svg_fallback}\") no-repeat center center; background-size: contain;"></div>
+            <div style="width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff2a3a; overflow: hidden; background-color: #1a221e; display: flex; align-items: center; justify-content: center; margin-right: 15px; position: relative;">
+                <!-- Player Photo -->
+                <img src="{p['Img']}" onerror="this.style.display='none'; document.getElementById('fallback-avatar').style.display='flex';" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                <!-- Text-Avatar Fallback Badge -->
+                <div id="fallback-avatar" style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; background-color: #222d27; color: #ff2a3a; font-size: 22px; font-weight: bold; font-family: 'Helvetica Neue', Arial, sans-serif;">
+                    {p['Initials']}
+                </div>
             </div>
             <div>
                 <div style="font-size: 20px; font-weight: bold; line-height: 1.2;">{selected_player}</div>
