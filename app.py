@@ -9,7 +9,7 @@ from sklearn.linear_model import LinearRegression
 # --- PAGE SETTINGS ---
 st.set_page_config(page_title="Data Science Lab", page_icon="🚀", layout="centered")
 
-# Global Premium Dark Theme Custom CSS
+# Global Theme Custom CSS (Keeps apps looking premium dark)
 st.markdown("""
     <style>
     .stApp { background-color: #0c100e; color: #ffffff; }
@@ -27,9 +27,9 @@ st.sidebar.write("---")
 # DASHBOARD 1: UNITED PLAYER ANALYTICS
 # ==========================================
 if project_choice == "⚽ United Player Analytics":
-    st.title("🛡️ manchester united players Premier League Profiles")
+    st.title("🛡️ Premier League Player Profiles")
     
-    # Expanded dictionary featuring complete stats and real face image URLs!
+    # Fully corrected dictionary with accurate image URL addresses
     players_data = {
         "Bruno Fernandes": {
             "Pos": "Attacking midfielder", "Age": 31, "Mat": 35, "G": 9, "A": 21, 
@@ -39,7 +39,7 @@ if project_choice == "⚽ United Player Analytics":
         "Bryan Mbeumo": {
             "Pos": "Forward/Winger", "Age": 26, "Mat": 33, "G": 11, "A": 3, 
             "Skills": [88, 75, 40, 35, 85, 78, 80, 72], "Nation": "CAMEROON 🇨🇲",
-            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p446006.png"
+            "Img": "https://resources.premierleague.com/premierleague/photos/players/250x250/p446008.png"
         },
         "Benjamin Šeško": {
             "Pos": "Striker", "Age": 23, "Mat": 30, "G": 11, "A": 1, 
@@ -66,12 +66,12 @@ if project_choice == "⚽ United Player Analytics":
     selected_player = st.selectbox("👤 Select Player to Generate Card:", list(players_data.keys()))
     p = players_data[selected_player]
     
-    # HTML component with real player face images dynamically updating!
+    # HTML component with integrated 'onerror' fallback validation script
     card_html = f"""
     <div style="background-color: #111613; border-radius: 15px; padding: 20px; border: 1px solid #1a221e; font-family: 'Helvetica Neue', Arial, sans-serif; color: white;">
         <div style="color: #ff2a3a; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-bottom: 8px;">❤️ HEARTBEAT</div>
         <div style="display: flex; align-items: center; margin-bottom: 15px;">
-            <img src="{p['Img']}" style="background-color: #1a221e; width: 65px; height: 65px; border-radius: 50%; object-fit: cover; margin-right: 15px; border: 2px solid #ff2a3a;" />
+            <img src="{p['Img']}" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/21/21104.png';" style="background-color: #1a221e; width: 65px; height: 65px; border-radius: 50%; object-fit: cover; margin-right: 15px; border: 2px solid #ff2a3a;" />
             <div>
                 <div style="font-size: 20px; font-weight: bold; line-height: 1.2;">{selected_player}</div>
                 <div style="color: #8a9990; font-size: 12px;">{p['Pos']}</div>
@@ -127,10 +127,10 @@ if project_choice == "⚽ United Player Analytics":
 # DASHBOARD 2: CALIFORNIA HOUSING ML
 # ==========================================
 elif project_choice == "🏡 California Housing ML":
-    st.title("🏡 California Housing Price Prediction Dashboard")
+    st.title("🏡 Price Prediction Dashboard")
     st.markdown("Adjust the metrics below to interactively predict real estate pricing using your trained machine learning model.")
     
-    # Simple Multi-variable Model
+    # Train background regression logic
     np.random.seed(42)
     mock_data = pd.DataFrame({
         'MedInc': np.random.uniform(1, 15, 500),
