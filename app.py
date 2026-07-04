@@ -66,12 +66,18 @@ if project_choice == "⚽ United Player Analytics":
     selected_player = st.selectbox("👤 Select Player to Generate Card:", list(players_data.keys()))
     p = players_data[selected_player]
     
-    # HTML component with integrated 'onerror' fallback validation script
+    # Elegant Inline SVG Silhouette that loads instantly if external URLs fail
+    svg_fallback = "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff2a3a'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E"
+
+    # HTML component with premium error recovery handling
     card_html = f"""
     <div style="background-color: #111613; border-radius: 15px; padding: 20px; border: 1px solid #1a221e; font-family: 'Helvetica Neue', Arial, sans-serif; color: white;">
         <div style="color: #ff2a3a; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-bottom: 8px;">❤️ HEARTBEAT</div>
         <div style="display: flex; align-items: center; margin-bottom: 15px;">
-            <img src="{p['Img']}" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/21/21104.png';" style="background-color: #1a221e; width: 65px; height: 65px; border-radius: 50%; object-fit: cover; margin-right: 15px; border: 2px solid #ff2a3a;" />
+            <div style="width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff2a3a; overflow: hidden; background-color: #1a221e; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                <img src="{p['Img']}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" style="width: 100%; height: 100%; object-fit: cover;" />
+                <div style="display: none; width: 40px; height: 40px; background: url(\"data:image/svg+xml,{svg_fallback}\") no-repeat center center; background-size: contain;"></div>
+            </div>
             <div>
                 <div style="font-size: 20px; font-weight: bold; line-height: 1.2;">{selected_player}</div>
                 <div style="color: #8a9990; font-size: 12px;">{p['Pos']}</div>
