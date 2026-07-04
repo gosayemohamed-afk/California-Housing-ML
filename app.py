@@ -28,7 +28,7 @@ if project_choice == "⚽ United Player Analytics":
     st.title("🛡️ Premier League Player Profiles")
     
     players_data = {
-        "Bruno Fernandes": {"Pos": "Attacking midfielder", "Age": 31, "Mat": 35, "G": 9, "A": 18, "Skills": [85, 92, 45, 55, 80, 95, 88, 94], "Nation": "PORTUGAL 🇵🇹"},
+        "Bruno Fernandes": {"Pos": "Attacking midfielder", "Age": 31, "Mat": 35, "G": 9, "A": 21, "Skills": [85, 92, 45, 55, 80, 95, 88, 94], "Nation": "PORTUGAL 🇵🇹"},
         "Bryan Mbeumo": {"Pos": "Forward/Winger", "Age": 26, "Mat": 33, "G": 11, "A": 3, "Skills": [88, 75, 40, 35, 85, 78, 80, 72], "Nation": "CAMEROON 🇨🇲"},
         "Benjamin Šeško": {"Pos": "Striker", "Age": 23, "Mat": 30, "G": 11, "A": 1, "Skills": [92, 65, 30, 25, 82, 68, 85, 60], "Nation": "SLOVENIA 🇸🇮"},
         "Matheus Cunha": {"Pos": "Forward", "Age": 27, "Mat": 33, "G": 10, "A": 2, "Skills": [84, 80, 52, 48, 86, 82, 81, 78], "Nation": "BRAZIL 🇧🇷"},
